@@ -6,7 +6,7 @@ function navigateTo(page) {
 
 function getPageFromHash() {
     const hash = window.location.hash.replace('#', '');
-    const validPages = ['home', 'books', 'about', 'contact', 'dashboard', 'settings', 'admin', 'notices'];
+    const validPages = ['home', 'books', 'about', 'contact', 'settings', 'admin', 'notices'];
     return validPages.includes(hash) ? hash : 'home';
 }
 
@@ -22,7 +22,6 @@ function renderCurrentPage() {
         // Competitions and Articles removed
         case 'about': renderAboutPage(contentDiv); break;
         case 'contact': renderContactPage(contentDiv); break;
-        case 'dashboard': renderDashboard(contentDiv); break;
         case 'settings': renderSettings(contentDiv); break;
         case 'admin': renderAdmin(contentDiv); break;
         case 'notices': renderNoticesPage(contentDiv); break;
@@ -54,8 +53,7 @@ function syncMobileMenu() {
         // Competitions and Articles removed from mobile menu
         { key: 'about', label: t('navAbout'), file: '#about' },
         { key: 'notices', label: t('navNotices'), file: '#notices' },
-        { key: 'contact', label: t('navContact'), file: '#contact' },
-        { key: 'dashboard', label: t('navDashboard'), file: '#dashboard' }
+        { key: 'contact', label: t('navContact'), file: '#contact' }
     ];
     menu.innerHTML = pages.map(p => `<a href="${p.file}">${p.label}</a>`).join('');
     if (APP.currentUser && APP.currentUser.role === 'admin') {
