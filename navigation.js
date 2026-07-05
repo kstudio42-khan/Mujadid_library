@@ -6,7 +6,7 @@ function navigateTo(page) {
 
 function getPageFromHash() {
     const hash = window.location.hash.replace('#', '');
-    const validPages = ['home', 'books', 'about', 'community', 'contact', 'cart', 'dashboard', 'settings', 'admin', 'notices'];
+    const validPages = ['home', 'books', 'about', 'contact', 'dashboard', 'settings', 'admin', 'notices'];
     return validPages.includes(hash) ? hash : 'home';
 }
 
@@ -21,15 +21,12 @@ function renderCurrentPage() {
         case 'books': renderBooksPage(contentDiv); break;
         // Competitions and Articles removed
         case 'about': renderAboutPage(contentDiv); break;
-        case 'community': renderCommunityPage(contentDiv); break;
         case 'contact': renderContactPage(contentDiv); break;
-        case 'cart': renderCartPage(contentDiv); break;
         case 'dashboard': renderDashboard(contentDiv); break;
         case 'settings': renderSettings(contentDiv); break;
         case 'admin': renderAdmin(contentDiv); break;
         case 'notices': renderNoticesPage(contentDiv); break;
     }
-    updateCartBadge();
     syncMobileMenu();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -56,10 +53,8 @@ function syncMobileMenu() {
         { key: 'books', label: t('navBooks'), file: '#books' },
         // Competitions and Articles removed from mobile menu
         { key: 'about', label: t('navAbout'), file: '#about' },
-        { key: 'community', label: t('navCommunity'), file: '#community' },
         { key: 'notices', label: t('navNotices'), file: '#notices' },
         { key: 'contact', label: t('navContact'), file: '#contact' },
-        { key: 'cart', label: t('cartTitle'), file: '#cart' },
         { key: 'dashboard', label: t('navDashboard'), file: '#dashboard' }
     ];
     menu.innerHTML = pages.map(p => `<a href="${p.file}">${p.label}</a>`).join('');
@@ -67,9 +62,4 @@ function syncMobileMenu() {
         menu.innerHTML += `<a href="#admin" style="color:var(--accent);">${t('adminTitle')}</a>`;
     }
     menu.innerHTML += `<a href="#settings" style="color:var(--gray-500);">${t('settingsTitle')}</a>`;
-}
-
-function updateCartBadge() {
-    const badge = document.getElementById('cartBadge');
-    if (badge) badge.textContent = APP.cart.reduce((s, c) => s + c.quantity, 0);
 }

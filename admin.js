@@ -13,13 +13,6 @@ function renderAdmin(container) {
       <button class="btn btn-primary btn-sm" onclick="showAddBookForm()">+ Add Book</button>
       <div class="table-wrap"><table><thead><tr><th>${t('adminId')}</th><th>${t('adminTitleCol')}</th><th>${t('adminType')}</th><th>${t('adminPrice')}</th><th>${t('adminPdf')}</th><th>${t('adminActions')}</th></tr></thead><tbody>${APP.dbBooks.map(b=>`<tr><td>${b.id}</td><td>${escapeHTML(getBookTitle(b))}</td><td>${escapeHTML(b.type)}</td><td>Rs.${b.price||0}</td><td>${b.hasPdf&&b.pdfFileId?'✅':'❌'}</td><td><button class="btn btn-sm btn-outline" onclick="editBook('${b.id}')">✏️</button> <button class="btn btn-sm btn-danger" onclick="deleteBook('${b.id}')">🗑</button></td></tr>`).join('')}</tbody></table></div>
 
-
-      <h3 style="margin-top:2rem;">📢 Manage Community Updates (${APP.dbCommunity.length})</h3>
-      <button class="btn btn-primary btn-sm" onclick="showAddCommunityForm()">+ Add Update</button>
-      <div class="table-wrap"><table><thead><tr><th>${t('adminId')}</th><th>${t('adminTitleCol')}</th><th>${t('adminType')}</th><th>${t('adminActions')}</th></tr></thead><tbody>${APP.dbCommunity.map(i=>`<tr><td>${i.id}</td><td>${escapeHTML(getCommTitle(i))}</td><td>${escapeHTML(i.type||'Update')}</td><td><button class="btn btn-sm btn-outline" onclick="editCommunity('${i.id}')">✏️</button> <button class="btn btn-sm btn-danger" onclick="deleteCommunity('${i.id}')">🗑</button></td></tr>`).join('')}</tbody></table></div>
-
-            <!-- Competitions, Testimonials, Articles & Submissions removed from admin panel -->
-
       <h3 style="margin-top:2rem;">📢 Manage Notices (${APP.dbNotices ? APP.dbNotices.length : 0})</h3>
       <button class="btn btn-primary btn-sm" onclick="showAddNoticeForm()">${t('adminAddNotice')}</button>
       <div class="table-wrap"><table><thead><tr><th>Title</th><th>Date</th><th>Priority</th><th>Pinned</th><th>Actions</th></tr></thead><tbody>${APP.dbNotices && APP.dbNotices.length ? APP.dbNotices.map(n=>`<tr><td>${escapeHTML(n.title)}</td><td>${escapeHTML(n.date)}</td><td>${escapeHTML(n.priority)}</td><td>${n.pinned ? '✅' : '❌'}</td><td>
@@ -218,76 +211,6 @@ async function deleteBook(bookId) {
 }
 
 // Competitions, Testimonials and related admin functions removed
-
-// Community updates
-function showAddCommunityForm() {
-    const modal = document.getElementById('modalBox');
-    modal.innerHTML = `
-    <button class="modal-close" onclick="closeModalDirect()">✕</button>
-    <h2>Add Community Update</h2>
-    <div class="form-group"><label>Title (English)</label><input type="text" id="newCommTitle"></div>
-    <div class="form-group"><label>Title (Urdu)</label><input type="text" id="newCommTitleUr"></div>
-    <div class="form-group"><label>Description</label><textarea id="newCommDesc" rows="3"></textarea></div>
-    <div class="form-group"><label>Description (Urdu)</label><textarea id="newCommDescUr" rows="3"></textarea></div>
-    <div class="form-group"><label>Type</label><input type="text" id="newCommType" value="Update"></div>
-    <div class="form-group"><label>Date</label><input type="text" id="newCommDate" value="${new Date().toISOString().split('T')[0]}"></div>
-    <button class="btn btn-primary btn-lg" style="width:100%;" onclick="addNewCommunity()">Add Update</button>`;
-    document.getElementById('modalOverlay').style.display = 'flex';
-}
-function addNewCommunity() {
-    const newItem = {
-        id: generateId('comm'),
-        title: document.getElementById('newCommTitle')?.value || 'Update',
-        titleUr: document.getElementById('newCommTitleUr')?.value || '',
-        desc: document.getElementById('newCommDesc')?.value || '',
-        descUr: document.getElementById('newCommDescUr')?.value || '',
-        type: document.getElementById('newCommType')?.value || 'Update',
-        date: document.getElementById('newCommDate')?.value || new Date().toISOString().split('T')[0],
-        likes: 0,
-        likedBy: [],
-        comments: []
-    };
-    APP.dbCommunity.push(newItem);
-    saveState();
-    closeModalDirect();
-    showToast('Community update added!', 'success');
-    renderCurrentPage();
-}
-function editCommunity(commId) {
-    const item = APP.dbCommunity.find(i => i.id === commId);
-    if (!item) return;
-    const modal = document.getElementById('modalBox');
-    modal.innerHTML = `
-    <button class="modal-close" onclick="closeModalDirect()">✕</button>
-    <h2>Edit Community Update</h2>
-    <div class="form-group"><label>Title</label><input type="text" id="editCommTitle" value="${escapeHTML(item.title)}"></div>
-    <div class="form-group"><label>Title (Urdu)</label><input type="text" id="editCommTitleUr" value="${escapeHTML(item.titleUr||'')}"></div>
-    <div class="form-group"><label>Description</label><textarea id="editCommDesc">${escapeHTML(item.desc||'')}</textarea></div>
-    <div class="form-group"><label>Type</label><input type="text" id="editCommType" value="${escapeHTML(item.type||'')}"></div>
-    <div class="form-group"><label>Date</label><input type="text" id="editCommDate" value="${escapeHTML(item.date||'')}"></div>
-    <button class="btn btn-primary btn-lg" style="width:100%;" onclick="saveEditCommunity('${commId}')">Save Changes</button>`;
-    document.getElementById('modalOverlay').style.display = 'flex';
-}
-function saveEditCommunity(commId) {
-    const item = APP.dbCommunity.find(i => i.id === commId);
-    if (!item) return;
-    item.title = document.getElementById('editCommTitle')?.value || item.title;
-    item.titleUr = document.getElementById('editCommTitleUr')?.value || item.titleUr;
-    item.desc = document.getElementById('editCommDesc')?.value || item.desc;
-    item.type = document.getElementById('editCommType')?.value || item.type;
-    item.date = document.getElementById('editCommDate')?.value || item.date;
-    saveState();
-    closeModalDirect();
-    showToast('Community update edited!', 'success');
-    renderCurrentPage();
-}
-function deleteCommunity(commId) {
-    if (!confirm('Delete this update?')) return;
-    APP.dbCommunity = APP.dbCommunity.filter(i => i.id !== commId);
-    saveState();
-    showToast('Community update deleted.', 'info');
-    renderCurrentPage();
-}
 
 // Articles and competition request handlers removed
 

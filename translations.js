@@ -7,7 +7,6 @@ const TR = {
         navBooks: 'Books',
         /* Competitions and Articles removed */
         navAbout: 'About Us',
-        navCommunity: 'Community',
         navContact: 'Contact',
         navDashboard: '👤 Dashboard',
         navNotices: '📢 Notice Board',
@@ -40,7 +39,6 @@ const TR = {
             <p>Our most important objective is not merely to publish books, but to encourage people to read and benefit from them. To achieve this goal, we launched the initiative "Read and Earn Rewards". Under this program, three different departments have already been established, and approximately 500 students have participated by reading books and writing articles and research papers on various topics.</p>
             <p>We pray that Allah Almighty accepts these efforts and makes them a means of preserving and spreading authentic Islamic knowledge for generations to come. Ameen.</p>
         `,
-        communityTitle: '📢 Community Updates',
         contactTitle: '📞 Contact Us',
         footerQuickLinks: 'Quick Links',
         footerBooks: 'Books',
@@ -53,19 +51,13 @@ const TR = {
         footerTerms: 'Terms of Service',
         freeLabel: 'Free',
         physicalLabel: 'Physical',
-        addToCart: 'Add to Cart',
         readNow: 'Read Now',
-        buyNow: 'Buy Now',
         orderNow: 'Order Now',
         loginRequired: 'Login Required',
         openBook: 'Open Book',
         continueReading: 'Continue Reading',
         bookmark: 'Bookmark',
         purchaseFirst: 'Purchase First',
-        cartTitle: '🛒 Shopping Cart',
-        emptyCart: 'Your cart is empty.',
-        checkout: 'Checkout',
-        totalLabel: 'Total',
         dashboardTitle: '👤 User Dashboard',
         settingsTitle: '⚙️ Settings',
         adminTitle: '🔧 Admin Panel',
@@ -134,7 +126,6 @@ const TR = {
         navBooks: 'کتابیں',
         /* Competitions and Articles removed */
         navAbout: 'ہمارے بارے میں',
-        navCommunity: 'کمیونٹی',
         navContact: 'رابطہ',
         navDashboard: '👤 ڈیش بورڈ',
         navNotices: '📢 نوٹس بورڈ',
@@ -168,7 +159,6 @@ const TR = {
             <p>ہمارا سب سے اہم مقصد صرف کتابوں کی اشاعت نہیں بلکہ لوگوں میں مطالعے کا ذوق پیدا کرنا ہے۔ اسی مقصد کے تحت ہم نے "مطالعہ کرو، انعام پاؤ" کی تحریک شروع کی، جس کے نتیجے میں اب تک الحمد للہ تین مختلف شعبے قائم کیے جا چکے ہیں۔ ان کے ذریعے تقریباً 500 طلبہ نہ صرف مطالعہ کر چکے ہیں بلکہ مختلف موضوعات پر مقالات اور تحقیقی مضامین بھی تحریر کر چکے ہیں۔</p>
             <p>ہم دعا گو ہیں کہ اللہ تعالیٰ ہماری ان کاوشوں کو قبول فرمائے اور انہیں دینِ اسلام کے صحیح علم کے فروغ اور آنے والی نسلوں کی علمی رہنمائی کا ذریعہ بنائے۔ آمین۔</p>
         `,
-        communityTitle: '📢 کمیونٹی اپ ڈیٹس',
         contactTitle: '📞 ہم سے رابطہ کریں',
         footerQuickLinks: 'فوری لنکس',
         footerBooks: 'کتابیں',
@@ -181,19 +171,13 @@ const TR = {
         footerTerms: 'خدمات کی شرائط',
         freeLabel: 'مفت',
         physicalLabel: 'طبعی',
-        addToCart: 'کارٹ میں ڈالیں',
         readNow: 'ابھی پڑھیں',
-        buyNow: 'ابھی خریدیں',
         orderNow: 'آرڈر کریں',
         loginRequired: 'لاگ ان ضروری ہے',
         openBook: 'کتاب کھولیں',
         continueReading: 'پڑھنا جاری رکھیں',
         bookmark: 'نشان لگائیں',
         purchaseFirst: 'پہلے خریدیں',
-        cartTitle: '🛒 خریداری کی ٹوکری',
-        emptyCart: 'آپ کی ٹوکری خالی ہے۔',
-        checkout: 'چیک آؤٹ',
-        totalLabel: 'کل',
         dashboardTitle: '👤 صارف ڈیش بورڈ',
         settingsTitle: '⚙️ ترتیبات',
         adminTitle: '🔧 ایڈمن پینل',
@@ -249,12 +233,9 @@ function t(key) { return (TR[APP.language] && TR[APP.language][key]) ? TR[APP.la
 function getBookTitle(b) { return APP.language === 'ur' && b.titleUr ? b.titleUr : b.title; }
 function getBookAuthor(b) { return APP.language === 'ur' && b.authorUr ? b.authorUr : b.author; }
 function getBookDesc(b) { return APP.language === 'ur' && b.descUr ? b.descUr : (b.desc || ''); }
-// Article/Competition/Testimonial helpers removed
-function getCommTitle(i) { return APP.language === 'ur' && i.titleUr ? i.titleUr : i.title; }
-function getCommDesc(i) { return APP.language === 'ur' && i.descUr ? i.descUr : (i.desc || ''); }
 
 function updateAllTexts() {
-    const ids = ['langTitle', 'navBrand', 'navHome', 'navBooks', 'navAbout', 'navCommunity',
+    const ids = ['langTitle', 'navBrand', 'navHome', 'navBooks', 'navAbout',
         'navContact', 'navDashboardBtn', 'navNotices', 'footerQuickLinks', 'footerBooks', 'footerContact', 'footerSocial',
         'footerFreeBooks', 'footerPhysicalBooks', 'footerContactUsLink', 'footerPrivacy', 'footerTerms'];
     ids.forEach(id => {
@@ -265,5 +246,4 @@ function updateAllTexts() {
     if (adminLink) adminLink.textContent = '🔧 ' + t('adminTitle');
     const searchBook = document.getElementById('bookSearchInput');
     if (searchBook) searchBook.placeholder = t('searchPlaceholder');
-    // Article and competition search inputs removed
 }

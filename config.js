@@ -7,15 +7,11 @@ const APP = {
   language: 'en',
   currentUser: null,
   currentPage: 'home',
-  cart: [],
   readingProgress: {},
   bookmarks: {},
   orders: [],
   purchasedBooks: [],
-  purchasedBooks: [],
   dbBooks: [],
-  dbCommunity: [],
-  dbCommunity: [],
   dbUsers: [
     { id: 'u1', name: 'Admin User', email: 'admin@gulshan.com', password: 'admin123', role: 'admin', joined: '2024-01-15' }
   ],

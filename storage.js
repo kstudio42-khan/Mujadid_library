@@ -88,7 +88,6 @@ async function deleteFile(fileId) {
 
 async function saveState() {
     const metadata = {
-        cart: APP.cart,
         readingProgress: APP.readingProgress,
         bookmarks: APP.bookmarks,
         orders: APP.orders,
@@ -97,7 +96,6 @@ async function saveState() {
         language: APP.language,
         dbBooks: APP.dbBooks,
         dbUsers: APP.dbUsers,
-        dbCommunity: APP.dbCommunity,
         dbNotices: APP.dbNotices
     };
     try {
@@ -112,7 +110,6 @@ async function loadState() {
         const record = await idbGet('metadata', 'appState');
         if (record && record.data) {
             const state = record.data;
-            APP.cart = state.cart || [];
             APP.readingProgress = state.readingProgress || {};
             APP.bookmarks = state.bookmarks || {};
             APP.orders = state.orders || [];
@@ -122,7 +119,6 @@ async function loadState() {
             if (state.dbBooks) APP.dbBooks = state.dbBooks;
             // dbArticles and dbCompetitions removed
             if (state.dbUsers) APP.dbUsers = state.dbUsers;
-            if (state.dbCommunity) APP.dbCommunity = state.dbCommunity;
             // dbTestimonials removed
             if (state.dbNotices) APP.dbNotices = state.dbNotices;
             if (state.language) APP.language = state.language;
@@ -133,7 +129,6 @@ async function loadState() {
         const raw = localStorage.getItem('gulshan_state_backup');
         if (raw) {
             const state = JSON.parse(raw);
-            APP.cart = state.cart || [];
             APP.readingProgress = state.readingProgress || {};
             APP.bookmarks = state.bookmarks || {};
             APP.orders = state.orders || [];
@@ -142,7 +137,6 @@ async function loadState() {
             APP.currentUser = state.currentUser || null;
             if (state.dbBooks) APP.dbBooks = state.dbBooks;
             if (state.dbUsers) APP.dbUsers = state.dbUsers;
-            if (state.dbCommunity) APP.dbCommunity = state.dbCommunity;
             if (state.dbNotices) APP.dbNotices = state.dbNotices;
             if (state.language) APP.language = state.language;
         }

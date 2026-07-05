@@ -57,7 +57,6 @@ function showApp() {
         document.documentElement.dir = 'rtl';
     }
     renderCurrentPage();
-    updateCartBadge();
     syncMobileMenu();
 }
 
