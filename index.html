@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gulshan-e-Mujadid-e-Alf-e-Sani - Islamic Online Library, Bookstore & Community Platform">
+    <title>Gulshan-e-Mujadid-e-Alf-e-Sani | Islamic Library</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- LANGUAGE SELECTION SCREEN -->
+    <div class="lang-screen" id="langScreen">
+        <div class="lang-logo">
+            <img src="image/logo.png" alt="Logo" style="max-width:150px;margin-bottom:1rem;">
+            <br>
+            Gulshan-e-Mujadid-e-Alf-e-Sani
+        </div>
+        <h1 id="langTitle">Select Your Language</h1>
+        <div class="lang-buttons">
+            <button class="lang-btn" onclick="setLanguage('en')" aria-label="Select English">🇬🇧 English</button>
+            <button class="lang-btn urdu-btn" onclick="setLanguage('ur')" aria-label="Select Urdu">🇵🇰 اردو</button>
+        </div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- NAVIGATION -->
+    <nav class="nav" id="mainNav" style="display:none;">
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo" aria-label="Home">
+                <img src="image/logo.png" alt="Logo" style="height:35px;margin-right:0.5rem;">
+                <span id="navBrand">Gulshan-e-Mujadid</span>
+            </a>
+            <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu" aria-expanded="false">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" data-page="home" id="navHome">Home</a></li>
+                <li><a href="#books" data-page="books" id="navBooks">Books</a></li>
+                <!-- Competitions and Articles removed -->
+                <li><a href="#about" data-page="about" id="navAbout">About Us</a></li>
+                <li><a href="#community" data-page="community" id="navCommunity">Community</a></li>
+                <li><a href="#notices" data-page="notices" id="navNotices">Notice Board</a></li>
+                <li><a href="#contact" data-page="contact" id="navContact">Contact</a></li>
+                <li>
+                    <button class="nav-cart-btn" onclick="navigateTo('cart')" aria-label="Cart">
+                        🛒 <span class="cart-badge" id="cartBadge">0</span>
+                    </button>
+                </li>
+                <li><button onclick="navigateTo('dashboard')" id="navDashboardBtn">👤 Dashboard</button></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content" id="mainContent" style="display:none;">
+        <div id="pageContent"></div>
+    </div>
+
+    <!-- MODAL OVERLAY -->
+    <div class="modal-overlay" id="modalOverlay" style="display:none;" onclick="closeModal(event)">
+        <div class="modal" id="modalBox" onclick="event.stopPropagation()"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="mainFooter" style="display:none;">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <h4 id="footerQuickLinks">Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#books">Books</a>
+                    <!-- Competitions and Articles links removed from footer -->
+                    <a href="#about">About Us</a>
+                </div>
+                <div>
+                    <h4 id="footerBooks">Books</h4>
+                    <a href="#books" onclick="sessionStorage.setItem('bookFilter','free')"><span id="footerFreeBooks">Free Books</span></a>
+                    <a href="#books" onclick="sessionStorage.setItem('bookFilter','physical')"><span id="footerPhysicalBooks">Physical Books</span></a>
+                </div>
+                <div>
+                    <h4 id="footerContact">Contact</h4>
+                    <a href="#contact"><span id="footerContactUsLink">Contact Us</span></a>
+                    <a href="#"><span id="footerPrivacy">Privacy Policy</span></a>
+                    <a href="#"><span id="footerTerms">Terms of Service</span></a>
+                </div>
+                <div>
+                    <h4 id="footerSocial">Social Media</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/18sHA7vtwL/" target="_blank" rel="noopener">📘 FB</a>
+                        <a href="https://www.instagram.com/tamizuddin.shaikh?igsh=MXJkYWZ1NXRzZjVkdQ==" target="_blank" rel="noopener">📷 IG</a>
+                        <a href="#">▶️ YT</a>
+                        <!-- Telegram removed -->
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">© 2026 Gulshan-e-Mujadid-e-Alf-e-Sani. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Modules (order matters for dependency resolution) -->
+<script src="config.js"></script>
+<script src="utils.js"></script>
+<script src="modal.js"></script>
+<script src="storage.js"></script>
+<script src="translations.js"></script>
+<script src="books.js"></script>
+<script src="pages.js"></script>          <!-- NEW -->
+<script src="community.js"></script>
+<script src="cart.js"></script>
+<script src="dashboard.js"></script>
+<script src="admin.js"></script>
+<script src="auth.js"></script>
+<script src="notices.js"></script>        <!-- if present -->
+<script src="navigation.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
