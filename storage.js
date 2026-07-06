@@ -95,7 +95,6 @@ async function saveState() {
         currentUser: APP.currentUser,
         language: APP.language,
         dbBooks: APP.dbBooks,
-        dbUsers: APP.dbUsers,
         dbNotices: APP.dbNotices
     };
     try {
@@ -118,8 +117,7 @@ async function loadState() {
             APP.currentUser = state.currentUser || null;
             if (state.dbBooks) APP.dbBooks = state.dbBooks;
             // dbArticles and dbCompetitions removed
-            if (state.dbUsers) APP.dbUsers = state.dbUsers;
-            // dbTestimonials removed
+            // dbUsers removed
             if (state.dbNotices) APP.dbNotices = state.dbNotices;
             if (state.language) APP.language = state.language;
             return;
@@ -136,7 +134,7 @@ async function loadState() {
             // Articles/Competitions state fallback removed
             APP.currentUser = state.currentUser || null;
             if (state.dbBooks) APP.dbBooks = state.dbBooks;
-            if (state.dbUsers) APP.dbUsers = state.dbUsers;
+            // dbUsers removed
             if (state.dbNotices) APP.dbNotices = state.dbNotices;
             if (state.language) APP.language = state.language;
         }

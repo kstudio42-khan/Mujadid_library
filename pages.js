@@ -13,8 +13,6 @@ function renderHome(container) {
       </div>
       <div class="stats-row" id="statsRow">
         <div class="stat-card"><div class="stat-num">${APP.dbBooks.length}</div><div class="stat-label">${t('statBooks')}</div></div>
-        <div class="stat-card"><div class="stat-num">${APP.dbUsers.length}</div><div class="stat-label">${t('statUsers')}</div></div>
-        <div class="stat-card"><div class="stat-num">${APP.dbUsers.length}</div><div class="stat-label">${t('statUsers')}</div></div>
       </div>
       <h2 class="section-title">${t('featBooksTitle')}</h2>
       <div class="card-grid" id="featuredBooksGrid">${featured.length ? featured.map(b => bookCard(b)).join('') : '<p style="color:gray;">No featured books yet.</p>'}</div>

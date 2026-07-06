@@ -21,9 +21,6 @@ function renderAdmin(container) {
         <button class="btn btn-sm btn-accent" onclick="togglePinNotice('${n.id}')">📌</button>
       </td></tr>`).join('') : '<tr><td colspan="5">No notices yet.</td></tr>'}</tbody></table></div>
 
-    <!-- Pending competition requests removed -->
-      <h3 style="margin-top:2rem;">👥 Users (${APP.dbUsers.length})</h3>
-      <div class="table-wrap"><table><thead><tr><th>${t('adminId')}</th><th>Name</th><th>Email</th><th>Role</th></tr></thead><tbody>${APP.dbUsers.map(u=>`<tr><td>${u.id}</td><td>${escapeHTML(u.name)}</td><td>${escapeHTML(u.email)}</td><td>${escapeHTML(u.role)}</td></tr>`).join('')}</tbody></table></div>
       <h3 style="margin-top:2rem;">📦 Orders (${APP.orders.length})</h3>${APP.orders.length?APP.orders.map(o=>`<p>${escapeHTML(o.id)} - Rs.${o.total} - ${escapeHTML(o.status)}</p>`).join(''):'<p>No orders.</p>'}
     </section>`;
     if (APP.currentUser && APP.currentUser.role === 'admin') {
