@@ -74,12 +74,18 @@ document.addEventListener('keydown', e => {
     }
 });
 
-document.addEventListener('DOMContentLoaded', async () => {
+async function startApp() {
     document.getElementById('langBtnEn').addEventListener('click', () => setLanguage('en'));
     document.getElementById('langBtnUr').addEventListener('click', () => setLanguage('ur'));
     await init();
     setTimeout(lazyLoadCovers, 300);
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startApp);
+} else {
+    startApp();
+}
 
 document.addEventListener('click', e => {
     const anchor = e.target.closest('a[href^="#"]');
