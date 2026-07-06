@@ -21,29 +21,35 @@ async function init() {
 }
 
 async function setLanguage(lang) {
-    APP.language = lang;
-    localStorage.setItem('gulshan_language', lang);
-    document.getElementById('langScreen').classList.add('hidden');
-    if (lang === 'ur') {
-        document.body.classList.add('rtl');
-        document.body.dir = 'rtl';
-        document.documentElement.lang = 'ur';
-        document.documentElement.dir = 'rtl';
-    } else {
-        document.body.classList.remove('rtl');
-        document.body.dir = 'ltr';
-        document.documentElement.lang = 'en';
-        document.documentElement.dir = 'ltr';
+    try {
+        APP.language = lang;
+        localStorage.setItem('gulshan_language', lang);
+        const langScreen = document.getElementById('langScreen');
+        if (!langScreen) return;
+        langScreen.classList.add('hidden');
+        if (lang === 'ur') {
+            document.body.classList.add('rtl');
+            document.body.dir = 'rtl';
+            document.documentElement.lang = 'ur';
+            document.documentElement.dir = 'rtl';
+        } else {
+            document.body.classList.remove('rtl');
+            document.body.dir = 'ltr';
+            document.documentElement.lang = 'en';
+            document.documentElement.dir = 'ltr';
+        }
+        if (!APP.initialized) await init();
+        if (document.getElementById('mainNav').style.display === 'flex') {
+            updateAllTexts();
+            renderCurrentPage();
+            syncMobileMenu();
+        } else {
+            showApp();
+        }
+        await saveState();
+    } catch (error) {
+        console.error('Error in setLanguage:', error);
     }
-    if (!APP.initialized) await init();
-    if (document.getElementById('mainNav').style.display === 'flex') {
-        updateAllTexts();
-        renderCurrentPage();
-        syncMobileMenu();
-    } else {
-        showApp();
-    }
-    await saveState();
 }
 
 function showApp() {
@@ -69,6 +75,8 @@ document.addEventListener('keydown', e => {
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
+    document.getElementById('langBtnEn').addEventListener('click', () => setLanguage('en'));
+    document.getElementById('langBtnUr').addEventListener('click', () => setLanguage('ur'));
     await init();
     setTimeout(lazyLoadCovers, 300);
 });
