@@ -38,8 +38,9 @@ function updateActiveNavLink(page) {
     });
 }
 
-function toggleMobileMenu() {
+window.toggleMobileMenu = function() {
     const menu = document.getElementById('mobileMenu');
+    if (!menu) return;
     menu.classList.toggle('open');
     if (menu.classList.contains('open')) syncMobileMenu();
 }
