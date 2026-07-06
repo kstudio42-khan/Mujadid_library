@@ -2,6 +2,7 @@
 const IDB_NAME = 'GulshanLibraryDB';
 const IDB_VERSION = 2;
 const WHATSAPP_ADMIN_NUMBER = "+919921845486";
+const API_URL = (window.location.hostname === 'localhost') ? 'http://localhost:5000/api' : '/api';
 
 const APP = {
   language: 'en',
@@ -12,8 +13,5 @@ const APP = {
   orders: [],
   purchasedBooks: [],
   dbBooks: [],
-  dbUsers: [
-    { id: 'u1', name: 'Admin User', email: 'admin@gulshan.com', password: 'admin123', role: 'admin', joined: '2024-01-15' }
-  ],
   initialized: false
 };

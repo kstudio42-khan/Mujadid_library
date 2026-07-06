@@ -1,5 +1,4 @@
 // ==================== BOOKS ====================
-const API_URL = 'http://localhost:5000/api';
 
 async function fetchBooks() {
     try {
