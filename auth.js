@@ -26,6 +26,17 @@ async function login() {
             saveState();
             closeModalDirect();
             showToast(`Welcome back, ${data.user.name}! 👋`, 'success');
+            
+            // Refresh navigation UI
+            const navLinks = document.getElementById('navLinks');
+            const navLogin = document.getElementById('navLogin');
+            if (navLogin) navLogin.parentElement.remove();
+            if (!document.getElementById('navAdminLink')) {
+                const li = document.createElement('li');
+                li.innerHTML = `<a href="#admin" id="navAdminLink" style="color:var(--accent);font-weight:600;">🔧 ${t('adminTitle')}</a>`;
+                navLinks.appendChild(li);
+            }
+            
             updateAllTexts();
             renderCurrentPage();
         } else {
@@ -37,8 +48,16 @@ async function login() {
 function logout() {
     APP.currentUser = null;
     localStorage.removeItem('token');
+    
+    // Restore login button
     const adminLink = document.getElementById('navAdminLink');
-    if (adminLink) adminLink.parentElement.remove();
+    if (adminLink) {
+        adminLink.parentElement.remove();
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="#" onclick="showLoginModal()" id="navLogin">Admin Login</a>`;
+        document.getElementById('navLinks').appendChild(li);
+    }
+    
     saveState();
     showToast('Logged out successfully.', 'info');
     updateAllTexts();

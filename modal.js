@@ -1,4 +1,15 @@
 // ==================== MODAL & TOAST ====================
+function showLoginModal() {
+    const modal = document.getElementById('modalBox');
+    modal.innerHTML = `
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <h2>🔐 Admin Login</h2>
+    <div class="form-group"><label>Email</label><input type="email" id="loginEmail" placeholder="admin@example.com"></div>
+    <div class="form-group"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••••"></div>
+    <button class="btn btn-primary btn-lg" style="width:100%;" onclick="login()">Login</button>`;
+    document.getElementById('modalOverlay').style.display = 'flex';
+}
+
 function closeModal(e) {
     if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
 }
