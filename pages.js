@@ -33,6 +33,21 @@ function renderHome(container) {
     setTimeout(lazyLoadCovers, 100);
 }
 
+function renderSettings(container) {
+    container.innerHTML = `
+    <section class="page-section active">
+      <h2 class="section-title">${t('settingsTitle')}</h2>
+      <div class="form-container">
+        <h3>🌐 Language</h3><p>Current: <strong>${APP.language==='en'?'English':'اردو'}</strong></p>
+        <button class="btn btn-outline" onclick="setLanguage('en')">🇬🇧 English</button>
+        <button class="btn btn-outline" onclick="setLanguage('ur')" style="font-family:var(--font-urdu);">🇵🇰 اردو</button>
+        <hr style="margin:1.5rem 0;">
+        <h3>🎨 Theme</h3><p>Reader dark mode is toggled inside the reader.</p>
+        <hr style="margin:1.5rem 0;"><h3>🔒 Privacy</h3><p>Your data is stored locally in your browser using IndexedDB.</p>
+      </div>
+    </section>`;
+}
+
 function renderAboutPage(container) {
     container.innerHTML = `
     <section class="page-section active">
