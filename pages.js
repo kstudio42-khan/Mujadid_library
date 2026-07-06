@@ -32,10 +32,30 @@ function renderHome(container) {
 }
 
 function renderSettings(container) {
+    let authHTML = '';
+    if (APP.currentUser) {
+        authHTML = `
+            <h3>👤 Admin</h3>
+            <p>Logged in as: <strong>${escapeHTML(APP.currentUser.name)}</strong></p>
+            <div style="display:flex;gap:0.5rem;">
+                <button class="btn btn-primary" onclick="navigateTo('admin')">🔧 Admin Dashboard</button>
+                <button class="btn btn-danger" onclick="logout()">🚪 Logout</button>
+            </div>
+        `;
+    } else {
+        authHTML = `
+            <h3>🔐 Administration</h3>
+            <p>Access for administrators only.</p>
+            <button class="btn btn-primary" onclick="showLoginModal()">🔐 Admin Login</button>
+        `;
+    }
+
     container.innerHTML = `
     <section class="page-section active">
       <h2 class="section-title">${t('settingsTitle')}</h2>
       <div class="form-container">
+        ${authHTML}
+        <hr style="margin:1.5rem 0;">
         <h3>🌐 Language</h3><p>Current: <strong>${APP.language==='en'?'English':'اردو'}</strong></p>
         <button class="btn btn-outline" onclick="setLanguage('en')">🇬🇧 English</button>
         <button class="btn btn-outline" onclick="setLanguage('ur')" style="font-family:var(--font-urdu);">🇵🇰 اردو</button>
